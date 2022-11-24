@@ -4,10 +4,18 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
 import { AuthContext } from "../../Context/AuthProvider";
 
 const Navbar = () => {
-  const { user } = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
   const [toggle, setToggle] = useState(false);
   const handleToggle = () => {
     setToggle(!toggle);
+  };
+  /* LOG OUT */
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {})
+      .catch((error) => {
+        console.lo(error);
+      });
   };
   return (
     <div className="shadow-lg md:flex justify-between items-center ">
@@ -28,22 +36,31 @@ const Navbar = () => {
           toggle ? "top-10px" : "top-[-210px]"
         }`}
       >
-        {user?.name}
         <li>
           <Link to="/">Home</Link>
         </li>
         <li>
-          <Link to="services">Services</Link>
+          <Link to="categories">Categories</Link>
         </li>
         <li>
           <Link to="blog">Blog</Link>
         </li>
-        <li>
-          <Link to="login">Login</Link>
-        </li>
-        <li>
-          <Link to="register">Register</Link>
-        </li>
+        {user?.uid ? (
+          <>
+            <button onClick={handleLogOut} className="btn btn-primary">
+              Logout
+            </button>
+          </>
+        ) : (
+          <>
+            <li>
+              <Link to="login">Login</Link>
+            </li>
+            <li>
+              <Link to="register">Register</Link>
+            </li>
+          </>
+        )}
       </ul>
     </div>
   );

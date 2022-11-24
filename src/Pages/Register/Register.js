@@ -1,8 +1,19 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { AuthContext } from "../../Context/AuthProvider";
+import { toast } from "react-hot-toast";
+import { GoogleAuthProvider } from "firebase/auth";
 
 const Register = () => {
+  const { createUser, updateUser, googleSignIn } = useContext(AuthContext);
+  const [registerError, setRegisterError] = useState("");
+  const provider = new GoogleAuthProvider();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+
+  /* USER REGISTER */
   const {
     register,
     handleSubmit,
@@ -10,10 +21,43 @@ const Register = () => {
   } = useForm();
   const handleRegister = (data) => {
     console.log(data);
+    setRegisterError("");
+    createUser(data.email, data.password)
+      .then((result) => {
+        updateUserInfo(data.name, data.role);
+      })
+      .catch((error) => {
+        console.log(error.message);
+        setRegisterError(error.message);
+      });
+  };
+  /* USER UPDATE  INFORMATION*/
+  const updateUserInfo = (name, role) => {
+    const profile = { displayName: name, photoURL: role };
+    updateUser(profile)
+      .then((result) => {
+        toast.success("Registration Successful");
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        setRegisterError(error.message);
+      });
+  };
+  /* GOOGLE SING IN */
+  const handleGoogleRegister = () => {
+    setRegisterError("");
+    googleSignIn(provider)
+      .then((result) => {
+        toast.success("Registration Successful");
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        setRegisterError(error.message);
+      });
   };
   return (
     <div className=" my-10 w-full mx-auto max-w-md p-8 space-y-3 rounded-xl bg-gray-100 text-black">
-      <h1 className="text-2xl font-bold text-center">Register</h1>
+      <h1 className="text-2xl font-bold text-center">Register </h1>
       <form
         novalidate=""
         action=""
@@ -91,13 +135,19 @@ const Register = () => {
             <option value="seller">Seller</option>
           </select>
         </div>
-
+        <p role="alert" className="text-red-500">
+          {registerError}
+        </p>
         <button className="block w-full p-3 text-center rounded-md bg-gray-600 dark:bg-teal-400 text-white">
           Register
         </button>
       </form>
       <div className="flex justify-center space-x-4">
-        <button aria-label="Log in with Google" className="p-3 rounded-sm">
+        <button
+          onClick={handleGoogleRegister}
+          aria-label="Log in with Google"
+          className="p-3 rounded-sm"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 32 32"
@@ -108,7 +158,7 @@ const Register = () => {
         </button>
       </div>
       <p className="text-xs text-center sm:px-6 dark:text-gray-400">
-        Don't have an account?
+        Already have an account?
         <Link
           rel="noopener noreferrer"
           to="/login"

@@ -1,15 +1,48 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { useContext, useState } from "react";
+import { AuthContext } from "./../../Context/AuthProvider";
+import { toast } from "react-hot-toast";
+import { GoogleAuthProvider } from "firebase/auth";
 
 const Login = () => {
+  const { login, googleLogin } = useContext(AuthContext);
+  const [loginError, setLoginError] = useState("");
+  const provider = new GoogleAuthProvider();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+
+  /* USER LOGIN */
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
   const handleLogin = (data) => {
-    console.log(data);
+    setLoginError("");
+    login(data.email, data.password)
+      .then((result) => {
+        toast.success("Login successful");
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        setLoginError(error.message);
+      });
+  };
+
+  /* GOOGLE LOGIN */
+  const handleGoogleLogin = () => {
+    setLoginError("");
+    googleLogin(provider)
+      .then((result) => {
+        toast.success("Login successful");
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        setLoginError(error.message);
+      });
   };
   return (
     <div className=" my-10 w-full mx-auto max-w-md p-8 space-y-3 rounded-xl bg-gray-100 text-black">
@@ -61,12 +94,19 @@ const Login = () => {
             {errors.password?.message}
           </p>
         )}
+        <p role="alert" class="text-red-500">
+          {loginError}
+        </p>
         <button className="block w-full p-3 text-center rounded-md bg-gray-600 dark:bg-teal-400 text-white">
           Login
         </button>
       </form>
       <div className="flex justify-center space-x-4">
-        <button aria-label="Log in with Google" className="p-3 rounded-sm">
+        <button
+          onClick={handleGoogleLogin}
+          aria-label="Log in with Google"
+          className="p-3 rounded-sm"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 32 32"
