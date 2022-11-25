@@ -1,12 +1,30 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
+import toast from "react-hot-toast";
 
 const Sellers = () => {
-  const { data: sellers = [] } = useQuery({
+  const { data: sellers = [], refetch } = useQuery({
     queryKey: ["/users/sellers"],
     queryFn: () =>
       fetch(`http://localhost:5000/users/sellers`).then((res) => res.json()),
   });
+
+  const handleDeleteSeller = (id) => {
+    const proceed = window.confirm("Are you sure you want to delete?");
+    if (proceed) {
+      fetch(`http://localhost:5000/seller/${id}`, {
+        method: "DELETE",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.deletedCount > 0) {
+            toast.success("Delete Successful");
+            refetch();
+          }
+        });
+    }
+  };
+
   return (
     <div>
       <h3 className="text-2xl font-bold">Total Sellers {sellers.length}</h3>
@@ -31,7 +49,12 @@ const Sellers = () => {
                     <td>{seller.email}</td>
                     <td>{seller.role}</td>
                     <td>
-                      <button className="btn btn-error">Delete</button>
+                      <button
+                        onClick={() => handleDeleteSeller(seller._id)}
+                        className="btn btn-error"
+                      >
+                        Delete
+                      </button>
                     </td>
                   </tr>
                 ))}
