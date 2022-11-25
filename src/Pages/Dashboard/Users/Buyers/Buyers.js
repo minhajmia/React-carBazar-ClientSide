@@ -23,17 +23,18 @@ const Buyers = () => {
               </tr>
             </thead>
             <tbody>
-              {buyers.map((buyer, ind) => (
-                <tr className="hover" key={buyer._id}>
-                  <th>{ind + 1}</th>
-                  <td>{buyer.name}</td>
-                  <td>{buyer.email}</td>
-                  <td>{buyer.role}</td>
-                  <td>
-                    <button className="btn btn-error">Delete</button>
-                  </td>
-                </tr>
-              ))}
+              {buyers &&
+                buyers.map((buyer, ind) => (
+                  <tr className="hover" key={buyer._id}>
+                    <th>{ind + 1}</th>
+                    <td>{buyer.name}</td>
+                    <td>{buyer.email}</td>
+                    <td>{buyer.role}</td>
+                    <td>
+                      <button className="btn btn-error">Delete</button>
+                    </td>
+                  </tr>
+                ))}
             </tbody>
           </table>
         </div>
