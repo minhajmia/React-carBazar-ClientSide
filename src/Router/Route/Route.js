@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import DashboardLayout from "../../Layouts/DashboardLayout/DashboardLayout";
 import MainLayout from "../../Layouts/MainLayout/MainLayout";
 import Categories from "../../Pages/Categories/Categories";
 import Login from "../../Pages/Login/Login";
@@ -15,7 +16,7 @@ const router = createBrowserRouter([
       { path: "register", element: <Register /> },
       { path: "login", element: <Login /> },
       {
-        path: "categories",
+        path: "categories/:id",
         element: (
           <PrivateRoute>
             <Categories />
@@ -24,5 +25,6 @@ const router = createBrowserRouter([
       },
     ],
   },
+  { path: "dashboard", element: <DashboardLayout /> },
 ]);
 export default router;

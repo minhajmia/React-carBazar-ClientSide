@@ -19,21 +19,38 @@ const Register = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  /* imgBiBi photo url */
+  const imgHostKey = "74136a91f009b23f0b27700320a86c57";
   const handleRegister = (data) => {
-    console.log(data);
     setRegisterError("");
-    createUser(data.email, data.password)
-      .then((result) => {
-        updateUserInfo(data.name, data.role);
-      })
-      .catch((error) => {
-        console.log(error.message);
-        setRegisterError(error.message);
+    const image = data.photo[0];
+    const formData = new FormData();
+    formData.append("image", image);
+
+    const url = `https://api.imgbb.com/1/upload?key=${imgHostKey}`;
+    fetch(url, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((imageData) => {
+        if (imageData.success) {
+          const photo = imageData.data.url;
+          createUser(data.email, data.password)
+            .then((result) => {
+              updateUserInfo(data.name, photo);
+            })
+            .catch((error) => {
+              console.log(error.message);
+              setRegisterError(error.message);
+            });
+        }
       });
   };
   /* USER UPDATE  INFORMATION*/
-  const updateUserInfo = (name, role) => {
-    const profile = { displayName: name, photoURL: role };
+  const updateUserInfo = (name, photo) => {
+    const profile = { displayName: name, photoURL: photo };
     updateUser(profile)
       .then((result) => {
         toast.success("Registration Successful");
@@ -77,7 +94,7 @@ const Register = () => {
           />
         </div>
         {errors.name && (
-          <p role="alert" class="text-error">
+          <p role="alert" className="text-error">
             {errors.name?.message}
           </p>
         )}
@@ -95,7 +112,7 @@ const Register = () => {
           />
         </div>
         {errors.email && (
-          <p role="alert" class="text-error">
+          <p role="alert" className="text-error">
             {errors.email?.message}
           </p>
         )}
@@ -118,10 +135,20 @@ const Register = () => {
           />
         </div>
         {errors.password && (
-          <p role="alert" class="text-error">
+          <p role="alert" className="text-error">
             {errors.password?.message}
           </p>
         )}
+        <div className="space-y-1 text-sm">
+          <label for="username" className="block dark:text-gray-400">
+            Photo
+          </label>
+          <input
+            type="file"
+            className="file-input file-input-bordered w-full "
+            {...register("photo")}
+          />
+        </div>
         <div className="space-y-1 text-sm">
           <label for="username" className="block dark:text-gray-400">
             Option

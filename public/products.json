@@ -1,0 +1,68 @@
+[
+  {
+    "picture": "https://www.twinstarcarsales.com/photos/9557/54b204fe-136a-c355-c211-f9b8d0ef109e_i800x600.jpg",
+    "orginalPrice": 4693,
+        "category_id": "63803b20f30ebec35ba5bf42",
+    "name": "Mercedes-Benz GLE GLE 450 4MATIC AMG LINE",
+    "yearOfUse": "2 years",
+    "sellerName": "karma",
+    "location": "484 Bliss Terrace, Guthrie, District Of Columbia, 9820",
+    "resalePrice": 1540,
+    "postdate": "2018-08-07"
+  },
+  {
+    "picture": "https://www.twinstarcarsales.com/photos/9557/4cee519a-3135-89c9-2aeb-d4be33c8d6d2_i800x600.jpg",
+    "orginalPrice": 3772,
+        "category_id":"63803b20f30ebec35ba5bf42",
+    "name": "Mercedes-Benz GLC Class GLC 300 4MATIC AMG",
+    "yearOfUse": "3 years",
+    "sellerName": "Layouts",
+    "location": "585 Harway Avenue, Grandview, Iowa, 2965",
+    "resalePrice": 1851,
+    "postdate": "2016-06-19"
+  },
+  {
+    "picture": "https://www.twinstarcarsales.com/photos/9557/4c857dec-e13b-da98-f56e-3671047cc564_i800x600.jpg",
+    "orginalPrice": 3965,
+     "category_id": "63803b20f30ebec35ba5bf44",
+    "name": "Land Rover Range Rover Sport SVR 5-Door",
+    "yearOfUse": "1 year",
+    "sellerName": "States yell",
+    "location": "360 Miller Avenue, Ballico, Federated States Of Micronesia, 8903",
+    "resalePrice": 2043,
+    "postdate": "2019-07-21"
+  },
+  {
+    "picture": "https://www.twinstarcarsales.com/photos/9557/2098c613-0a3b-81cd-4c14-2ce22712103a_i800x600.jpg",
+    "orginalPrice": 4595,
+    "name": " Land Rover  911 CARRERA S PDK 2-Door",
+     "category_id": "63803b20f30ebec35ba5bf44",
+    "yearOfUse": "1 year",
+    "sellerName": "Hudson Burton",
+    "location": "693 Ford Street, Keyport, Idaho, 573",
+    "resalePrice": 1631,
+    "postdate": "2020-07-28"
+  },
+  {
+    "picture": "https://www.twinstarcarsales.com/photos/9557/46ad8534-c785-a5a4-30a7-4def84892d5d_i800x600.jpg",
+    "orginalPrice": 4526,
+    "name": " Porsche Cayenne V6 TIPTRONIC 4-Door",
+    "yearOfUse": "2 years",
+       "category_id": "63803b20f30ebec35ba5bf43",
+    "sellerName": "Catonson",
+    "location": "664 Livonia Avenue, Iberia, Montana, 3657",
+    "resalePrice": 1222,
+    "postdate": "2022-04-14"
+  },
+  {
+    "picture": "https://www.twinstarcarsales.com/photos/9557/2098c613-0a3b-81cd-4c14-2ce22712103a_i800x600.jpg",
+    "orginalPrice": 4681,
+    "name": "Porsche V8 AUTOBIOGRAPHY LWB",
+       "category_id": "63803b20f30ebec35ba5bf43",
+    "yearOfUse": "3 years",
+    "sellerName": "kongson",
+    "location": "496 Monument Walk, Hessville, Michigan, 254",
+    "resalePrice": 2239,
+    "postdate": "2017-01-06"
+  }
+]

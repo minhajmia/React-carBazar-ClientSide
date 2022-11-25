@@ -66,7 +66,7 @@ const Login = () => {
           />
         </div>
         {errors.email && (
-          <p role="alert" class="text-error">
+          <p role="alert" className="text-error">
             {errors.email?.message}
           </p>
         )}
@@ -90,11 +90,11 @@ const Login = () => {
           />
         </div>
         {errors.password && (
-          <p role="alert" class="text-error">
+          <p role="alert" className="text-error">
             {errors.password?.message}
           </p>
         )}
-        <p role="alert" class="text-red-500">
+        <p role="alert" className="text-red-500">
           {loginError}
         </p>
         <button className="block w-full p-3 text-center rounded-md bg-gray-600 dark:bg-teal-400 text-white">

@@ -21,9 +21,9 @@ const Navbar = () => {
     <div className="shadow-lg md:flex justify-between items-center ">
       <div className="md:hidden  " onClick={handleToggle}>
         {toggle ? (
-          <XMarkIcon class="h-10 w-10 text-black" />
+          <XMarkIcon className="h-10 w-10 text-black" />
         ) : (
-          <Bars3Icon class="h-10 w-10 text-black" />
+          <Bars3Icon className="h-10 w-10 text-black" />
         )}
       </div>
       <div className="text-center md:text-left">
@@ -40,16 +40,21 @@ const Navbar = () => {
           <Link to="/">Home</Link>
         </li>
         <li>
-          <Link to="categories">Categories</Link>
+          <Link to="blog">Blog</Link>
         </li>
         <li>
-          <Link to="blog">Blog</Link>
+          <Link to="dashboard">Dashboard</Link>
         </li>
         {user?.uid ? (
           <>
             <button onClick={handleLogOut} className="btn btn-primary">
               Logout
             </button>
+            <img
+              alt=""
+              className="w-12 h-12 rounded-full  "
+              src={user?.photoURL}
+            />
           </>
         ) : (
           <>
