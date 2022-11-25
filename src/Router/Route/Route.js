@@ -5,6 +5,8 @@ import Blog from "../../Pages/Blog/Blog";
 import Categories from "../../Pages/Categories/Categories";
 import Dashboard from "../../Pages/Dashboard/Dashboard";
 import MyOrders from "../../Pages/Dashboard/MyOrder/MyOrders";
+import Buyers from "../../Pages/Dashboard/Users/Buyers/Buyers";
+import Sellers from "../../Pages/Dashboard/Users/Sellers/Sellers";
 import Users from "../../Pages/Dashboard/Users/Users";
 import Login from "../../Pages/Login/Login";
 import NotFound from "../../Pages/NotFound/NotFound";
@@ -43,6 +45,9 @@ const router = createBrowserRouter([
       { path: "/dashboard", element: <Dashboard /> },
       { path: "/dashboard/dashboard", element: <Dashboard /> },
       { path: "/dashboard/dashboard/users", element: <Users /> },
+      { path: "/dashboard/dashboard/myOrders", element: <MyOrders /> },
+      { path: "/dashboard/dashboard/sellers", element: <Sellers /> },
+      { path: "/dashboard/dashboard/buyers", element: <Buyers /> },
       { path: "/dashboard/dashboard/myOrders", element: <MyOrders /> },
       { path: "*", element: <NotFound /> },
     ],
