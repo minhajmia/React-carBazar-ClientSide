@@ -1,7 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 import DashboardLayout from "../../Layouts/DashboardLayout/DashboardLayout";
 import MainLayout from "../../Layouts/MainLayout/MainLayout";
+import Blog from "../../Pages/Blog/Blog";
 import Categories from "../../Pages/Categories/Categories";
+import Dashboard from "../../Pages/Dashboard/Dashboard";
+import MyOrders from "../../Pages/Dashboard/MyOrder/MyOrders";
+import Users from "../../Pages/Dashboard/Users/Users";
 import Login from "../../Pages/Login/Login";
 import Register from "../../Pages/Register/Register";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
@@ -15,6 +19,7 @@ const router = createBrowserRouter([
       { path: "/", element: <Home /> },
       { path: "register", element: <Register /> },
       { path: "login", element: <Login /> },
+      { path: "/blog", element: <Blog /> },
       {
         path: "categories/:id",
         element: (
@@ -25,6 +30,15 @@ const router = createBrowserRouter([
       },
     ],
   },
-  { path: "dashboard", element: <DashboardLayout /> },
+  {
+    path: "dashboard",
+    element: <DashboardLayout />,
+    children: [
+      { path: "/dashboard", element: <Dashboard /> },
+      { path: "/dashboard/dashboard", element: <Dashboard /> },
+      { path: "/dashboard/dashboard/users", element: <Users /> },
+      { path: "/dashboard/dashboard/myOrders", element: <MyOrders /> },
+    ],
+  },
 ]);
 export default router;

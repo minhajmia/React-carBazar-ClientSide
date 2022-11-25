@@ -5,10 +5,6 @@ import { AuthContext } from "../../Context/AuthProvider";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
-  const [toggle, setToggle] = useState(false);
-  const handleToggle = () => {
-    setToggle(!toggle);
-  };
   /* LOG OUT */
   const handleLogOut = () => {
     logOut()
@@ -17,56 +13,81 @@ const Navbar = () => {
         console.lo(error);
       });
   };
+
+  const menu = (
+    <>
+      <li>
+        <Link to="/">Home</Link>
+      </li>
+      <li>
+        <Link to="blog">Blog</Link>
+      </li>
+      <li>
+        <Link to="dashboard">Dashboard</Link>
+      </li>
+    </>
+  );
   return (
-    <div className="shadow-lg md:flex justify-between items-center ">
-      <div className="md:hidden  " onClick={handleToggle}>
-        {toggle ? (
-          <XMarkIcon className="h-10 w-10 text-black" />
-        ) : (
-          <Bars3Icon className="h-10 w-10 text-black" />
-        )}
+    <div className="navbar bg-base-100">
+      <div className="navbar-start">
+        <div className="dropdown">
+          <label tabIndex={0} className="btn btn-ghost lg:hidden">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M4 6h16M4 12h8m-8 6h16"
+              />
+            </svg>
+          </label>
+          <ul
+            tabIndex={1}
+            className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+          >
+            {menu}
+          </ul>
+        </div>
+        <a href="true" className="btn btn-ghost normal-case text-xl">
+          daisyUI
+        </a>
       </div>
-      <div className="text-center md:text-left">
-        <Link to="/">
-          <img src="" alt="" className=" inline-block" />
-        </Link>
+      <div className="navbar-center hidden lg:flex">
+        <ul className="menu menu-horizontal p-0">{menu}</ul>
       </div>
-      <ul
-        className={`md:flex text-center absolute md:static  items-center bg-white  w-full md:w-auto z-[100]  mr-5   ${
-          toggle ? "top-10px" : "top-[-210px]"
-        }`}
+      <div className="navbar-end">
+        <img
+          alt=""
+          className="w-12 h-12 border rounded-full dark:bg-gray-500 dark:border-gray-700"
+          src={user?.photoURL}
+        />
+      </div>
+      <label
+        htmlFor="dashboardDrawer"
+        tabIndex={2}
+        className="btn btn-ghost lg:hidden"
       >
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="blog">Blog</Link>
-        </li>
-        <li>
-          <Link to="dashboard">Dashboard</Link>
-        </li>
-        {user?.uid ? (
-          <>
-            <button onClick={handleLogOut} className="btn btn-primary">
-              Logout
-            </button>
-            <img
-              alt=""
-              className="w-12 h-12 rounded-full  "
-              src={user?.photoURL}
-            />
-          </>
-        ) : (
-          <>
-            <li>
-              <Link to="login">Login</Link>
-            </li>
-            <li>
-              <Link to="register">Register</Link>
-            </li>
-          </>
-        )}
-      </ul>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-5 w-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M4 6h16M4 12h8m-8 6h16"
+          />
+        </svg>
+      </label>
     </div>
   );
 };
