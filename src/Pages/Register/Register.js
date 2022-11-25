@@ -23,6 +23,7 @@ const Register = () => {
   /* imgBiBi photo url */
   const imgHostKey = "74136a91f009b23f0b27700320a86c57";
   const handleRegister = (data) => {
+    console.log(data);
     setRegisterError("");
     const image = data.photo[0];
     const formData = new FormData();
@@ -39,7 +40,7 @@ const Register = () => {
           const photo = imageData.data.url;
           createUser(data.email, data.password)
             .then((result) => {
-              updateUserInfo(data.name, photo);
+              updateUserInfo(data.name, photo, data);
             })
             .catch((error) => {
               console.log(error.message);
@@ -49,15 +50,32 @@ const Register = () => {
       });
   };
   /* USER UPDATE  INFORMATION*/
-  const updateUserInfo = (name, photo) => {
+  const updateUserInfo = (name, photo, data) => {
     const profile = { displayName: name, photoURL: photo };
     updateUser(profile)
       .then((result) => {
-        toast.success("Registration Successful");
-        navigate(from, { replace: true });
+        saveUserToDb(data.name, data.email, data.role);
       })
       .catch((error) => {
         setRegisterError(error.message);
+      });
+  };
+
+  // Save user to Database
+  const saveUserToDb = (name, email, role) => {
+    const user = { name, email, role, isVerify: true };
+    fetch("http://localhost:5000/users", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        toast.success("Registration Successful");
+        navigate(from, { replace: true });
       });
   };
   /* GOOGLE SING IN */

@@ -7,6 +7,7 @@ import Dashboard from "../../Pages/Dashboard/Dashboard";
 import MyOrders from "../../Pages/Dashboard/MyOrder/MyOrders";
 import Users from "../../Pages/Dashboard/Users/Users";
 import Login from "../../Pages/Login/Login";
+import NotFound from "../../Pages/NotFound/NotFound";
 import Register from "../../Pages/Register/Register";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import Home from "./../../Pages/Home/Home";
@@ -20,6 +21,7 @@ const router = createBrowserRouter([
       { path: "register", element: <Register /> },
       { path: "login", element: <Login /> },
       { path: "/blog", element: <Blog /> },
+      { path: "*", element: <NotFound /> },
       {
         path: "categories/:id",
         element: (
@@ -32,12 +34,17 @@ const router = createBrowserRouter([
   },
   {
     path: "dashboard",
-    element: <DashboardLayout />,
+    element: (
+      <PrivateRoute>
+        <DashboardLayout />
+      </PrivateRoute>
+    ),
     children: [
       { path: "/dashboard", element: <Dashboard /> },
       { path: "/dashboard/dashboard", element: <Dashboard /> },
       { path: "/dashboard/dashboard/users", element: <Users /> },
       { path: "/dashboard/dashboard/myOrders", element: <MyOrders /> },
+      { path: "*", element: <NotFound /> },
     ],
   },
 ]);

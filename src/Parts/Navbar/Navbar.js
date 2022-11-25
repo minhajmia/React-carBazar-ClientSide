@@ -1,6 +1,5 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
 import { AuthContext } from "../../Context/AuthProvider";
 
 const Navbar = () => {
@@ -22,9 +21,27 @@ const Navbar = () => {
       <li>
         <Link to="blog">Blog</Link>
       </li>
-      <li>
-        <Link to="dashboard">Dashboard</Link>
-      </li>
+      {user?.uid ? (
+        <>
+          <li>
+            <Link to="dashboard">Dashboard</Link>
+          </li>
+          <li>
+            <button onClick={handleLogOut} className="btn text-white">
+              LogOut
+            </button>
+          </li>
+        </>
+      ) : (
+        <>
+          <li>
+            <Link to="login">Login</Link>
+          </li>
+          <li>
+            <Link to="register">Register</Link>
+          </li>
+        </>
+      )}
     </>
   );
   return (
