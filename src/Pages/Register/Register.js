@@ -63,7 +63,7 @@ const Register = () => {
 
   // Save user to Database
   const saveUserToDb = (name, email, role) => {
-    const user = { name, email, role, isVerify: true };
+    const user = { name, email, role };
     fetch("http://localhost:5000/users", {
       method: "POST",
       headers: {
