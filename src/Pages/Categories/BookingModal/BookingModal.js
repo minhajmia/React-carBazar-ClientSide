@@ -25,7 +25,8 @@ const BookingModal = ({ bookingProduct, setBookingProduct, refetch }) => {
     const price = form.price.value;
     const phone = form.phone.value;
     const location = form.location.value;
-    const booking = { name, email, product, price, phone, location };
+    const photo = form.photo.value;
+    const booking = { name, email, product, price, phone, location, photo };
 
     fetch("http://localhost:5000/bookings", {
       method: "POST",
@@ -99,6 +100,19 @@ const BookingModal = ({ bookingProduct, setBookingProduct, refetch }) => {
                   placeholder="Type here"
                   className="input input-bordered w-full "
                   name="product"
+                  disabled
+                />
+              </div>
+              <div className="form-control mt-2 ">
+                <label htmlFor="" className="font-semibold">
+                  Product Photo :{" "}
+                </label>
+                <input
+                  type="text"
+                  value={picture}
+                  placeholder="Type here"
+                  className="input input-bordered w-full "
+                  name="photo"
                   disabled
                 />
               </div>

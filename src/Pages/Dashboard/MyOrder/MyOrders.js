@@ -7,50 +7,49 @@ const MyOrders = () => {
     queryFn: () =>
       fetch("http://localhost:5000/bookings").then((res) => res.json()),
   });
-
+  console.log(orders);
   return (
     <div>
-      <h2>My Orders {orders.length}</h2>
+      <h2 className="text-2xl  font-bold">My Orders {orders.length}</h2>
       <div>
         <div className="overflow-x-auto w-full">
           <table className="table w-full">
             <thead>
               <tr>
-                <th></th>
+                <th>Product Image</th>
                 <th>Name</th>
-                <th>Job</th>
-                <th>Favorite Color</th>
-                <th></th>
+                <th>Product Name</th>
+                <th>Price</th>
+                <th>Payment Status</th>
               </tr>
             </thead>
             <tbody>
               {orders &&
                 orders.map((order) => (
                   <tr key={order._id}>
-                    <th></th>
                     <td>
                       <div className="flex items-center space-x-3">
                         <div className="avatar">
                           <div className="mask mask-squircle w-12 h-12">
-                            <img src={order.picture} alt="car " />
+                            <img src={order.photo} alt="car " />
                           </div>
-                        </div>
-                        <div>
-                          <div className="font-bold">Brice Swyre</div>
-                          <div className="text-sm opacity-50">China</div>
                         </div>
                       </div>
                     </td>
                     <td>
-                      Carroll Group
-                      <br />
-                      <span className="badge badge-ghost badge-sm">
-                        Tax Accountant
-                      </span>
+                      <div>
+                        <div className="font-bold">{order.name}</div>
+                        <div className="text-sm opacity-50">
+                          {order.location}
+                        </div>
+                      </div>
                     </td>
-                    <td>Red</td>
+                    <td>
+                      <p>{order.product}</p>
+                    </td>
+                    <td>{order.price}</td>
                     <th>
-                      <button className="btn btn-ghost btn-xs">details</button>
+                      <button className="btn btn-accent">Pay</button>
                     </th>
                   </tr>
                 ))}
