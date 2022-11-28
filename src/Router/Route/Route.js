@@ -13,7 +13,9 @@ import Users from "../../Pages/Dashboard/Users/Users";
 import Login from "../../Pages/Login/Login";
 import NotFound from "../../Pages/NotFound/NotFound";
 import Register from "../../Pages/Register/Register";
+import AdminRoute from "../AdminRoute/AdminRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import SellerRoute from "../SellerRoute/SellerRoute";
 import Home from "./../../Pages/Home/Home";
 
 const router = createBrowserRouter([
@@ -48,11 +50,39 @@ const router = createBrowserRouter([
       { path: "/dashboard/dashboard", element: <Dashboard /> },
       { path: "/dashboard/dashboard/users", element: <Users /> },
       { path: "/dashboard/dashboard/myOrders", element: <MyOrders /> },
-      { path: "/dashboard/dashboard/sellers", element: <Sellers /> },
-      { path: "/dashboard/dashboard/buyers", element: <Buyers /> },
+      {
+        path: "/dashboard/dashboard/sellers",
+        element: (
+          <AdminRoute>
+            <Sellers />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "/dashboard/dashboard/buyers",
+        element: (
+          <AdminRoute>
+            <Buyers />
+          </AdminRoute>
+        ),
+      },
       { path: "/dashboard/dashboard/myOrders", element: <MyOrders /> },
-      { path: "/dashboard/dashboard/addProduct", element: <AddProduct /> },
-      { path: "/dashboard/dashboard/myProducts", element: <MyProduct /> },
+      {
+        path: "/dashboard/dashboard/addProduct",
+        element: (
+          <SellerRoute>
+            <AddProduct />
+          </SellerRoute>
+        ),
+      },
+      {
+        path: "/dashboard/dashboard/myProducts",
+        element: (
+          <SellerRoute>
+            <MyProduct />
+          </SellerRoute>
+        ),
+      },
       { path: "*", element: <NotFound /> },
     ],
   },

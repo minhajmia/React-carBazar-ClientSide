@@ -7,9 +7,11 @@ const MyOrders = () => {
   const { data: orders = [] } = useQuery({
     queryKey: [user?.email],
     queryFn: () =>
-      fetch(`http://localhost:5000/bookings?email=${user?.email}`).then((res) =>
-        res.json()
-      ),
+      fetch(`http://localhost:5000/bookings?email=${user?.email}`, {
+        headers: {
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }).then((res) => res.json()),
   });
   console.log(orders);
   return (

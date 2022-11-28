@@ -5,6 +5,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "./../../Context/AuthProvider";
 import { toast } from "react-hot-toast";
 import { GoogleAuthProvider } from "firebase/auth";
+import useToken from "../../Hooks/useToken";
 
 const Login = () => {
   const { login, googleLogin } = useContext(AuthContext);
@@ -13,7 +14,13 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
+  const [loginUserEmail, setLoginUserEmail] = useState("");
+  const [token] = useToken(loginUserEmail);
 
+  if (token) {
+    toast.success("Login successful");
+    navigate(from, { replace: true });
+  }
   /* USER LOGIN */
   const {
     register,
@@ -24,8 +31,7 @@ const Login = () => {
     setLoginError("");
     login(data.email, data.password)
       .then((result) => {
-        toast.success("Login successful");
-        navigate(from, { replace: true });
+        setLoginUserEmail(data.email);
       })
       .catch((error) => {
         setLoginError(error.message);

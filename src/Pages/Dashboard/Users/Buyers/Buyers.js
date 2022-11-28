@@ -6,7 +6,11 @@ const Buyers = () => {
   const { data: buyers = [], refetch } = useQuery({
     queryKey: ["/users/buyers"],
     queryFn: () =>
-      fetch(`http://localhost:5000/users/buyers`).then((res) => res.json()),
+      fetch(`http://localhost:5000/users/buyers`, {
+        headers: {
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }).then((res) => res.json()),
   });
   const handleDeleteBuyer = (id) => {
     const proceed = window.confirm("Are you sure you want to delete?");

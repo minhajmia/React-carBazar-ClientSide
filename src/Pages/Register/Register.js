@@ -4,15 +4,23 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Context/AuthProvider";
 import { toast } from "react-hot-toast";
 import { GoogleAuthProvider } from "firebase/auth";
+import useToken from "../../Hooks/useToken";
 
 const Register = () => {
-  const { createUser, updateUser, googleSignIn } = useContext(AuthContext);
+  const { createUser, updateUser, googleSignIn, user } =
+    useContext(AuthContext);
   const [registerError, setRegisterError] = useState("");
   const provider = new GoogleAuthProvider();
   const navigate = useNavigate();
   const location = useLocation();
+  const [createdUserEmail, setCreatedUserEmail] = useState("");
+  const [token] = useToken(createdUserEmail);
   const from = location.state?.from?.pathname || "/";
 
+  if (token) {
+    toast.success("Registration Successful");
+    navigate(from, { replace: true });
+  }
   /* USER REGISTER */
   const {
     register,
@@ -73,11 +81,10 @@ const Register = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-        toast.success("Registration Successful");
-        navigate(from, { replace: true });
+        setCreatedUserEmail(email);
       });
   };
+
   /* GOOGLE SING IN */
   const handleGoogleRegister = () => {
     setRegisterError("");

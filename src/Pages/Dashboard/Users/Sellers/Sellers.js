@@ -7,7 +7,11 @@ const Sellers = () => {
   const { data: sellers = [], refetch } = useQuery({
     queryKey: ["/users/sellers"],
     queryFn: () =>
-      fetch(`http://localhost:5000/users/sellers`).then((res) => res.json()),
+      fetch(`http://localhost:5000/users/sellers`, {
+        headers: {
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }).then((res) => res.json()),
   });
 
   /* HANDLE DELETE SELLER */

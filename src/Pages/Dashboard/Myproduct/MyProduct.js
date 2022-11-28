@@ -1,23 +1,53 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
+import toast from "react-hot-toast";
 import { AuthContext } from "../../../Context/AuthProvider";
 
 const MyProduct = () => {
   const { user } = useContext(AuthContext);
 
-  const { data: sellerProducts = [] } = useQuery({
+  const { data: sellerProducts = [], refetch } = useQuery({
     queryKey: [user?.email],
     queryFn: () =>
-      fetch(`http://localhost:5000/sellerProducts?email=${user?.email}`).then(
-        (res) => res.json()
-      ),
+      fetch(`http://localhost:5000/sellerProducts?email=${user?.email}`, {
+        headers: {
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }).then((res) => res.json()),
   });
+  /*  DELETE SELLER INDIVIDUAL PRODUCT */
   const handleDelete = (id) => {
+    const proceed = window.confirm("Are you sure you want to delete?");
+    if (proceed) {
+      fetch(`http://localhost:5000/sellerProduct/${id}`, {
+        method: "DELETE",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.deletedCount > 0) {
+            toast.success("Delete successful");
+            refetch();
+          }
+        });
+    }
+  };
+
+  /* ADVERTISE SELLER INDIVIDUAL PRODUCT */
+  const handleAdvertise = (id) => {
     console.log(id);
+    fetch(`http://localhost:5000/product/advertise/${id}`, { method: "PUT" })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount > 0) {
+          toast.success("Advertise successful");
+        }
+      });
   };
   return (
     <div>
-      <h2 className="text-2xl  font-bold">My Orders {sellerProducts.length}</h2>
+      <h2 className="text-2xl  font-bold">
+        My Added Product {sellerProducts.length}
+      </h2>
       <div>
         <div className="overflow-x-auto w-full">
           <table className="table w-full">
@@ -52,7 +82,12 @@ const MyProduct = () => {
                       <button className="btn btn-accent">Sold</button>
                     </th>
                     <th>
-                      <button className="btn btn-success">Advertise</button>
+                      <button
+                        onClick={() => handleAdvertise(product._id)}
+                        className="btn btn-success"
+                      >
+                        Advertise
+                      </button>
                     </th>
                     <th>
                       <button
