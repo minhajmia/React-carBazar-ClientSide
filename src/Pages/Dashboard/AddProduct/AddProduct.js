@@ -7,13 +7,22 @@ import { AuthContext } from "./../../../Context/AuthProvider";
 
 const AddProduct = () => {
   const { user } = useContext(AuthContext);
+
+  /* CHECK VERIFY SELLER*/
+  const { data: sellers = [] } = useQuery({
+    queryKey: ["/users/sellers"],
+    queryFn: () =>
+      fetch(`http://localhost:5000/users/sellers/verify/${user?.email}`).then(
+        (res) => res.json()
+      ),
+  });
+
   /* LOAD ALL CATEGORY*/
   const { data: allCategory = [] } = useQuery({
     queryKey: ["categories"],
     queryFn: () =>
       fetch("http://localhost:5000/categories").then((res) => res.json()),
   });
-  console.log(allCategory);
   const navigate = useNavigate();
 
   /* imgBiBi photo url */
@@ -37,6 +46,8 @@ const AddProduct = () => {
           data.picture = photo;
           let category_id;
           category_id = data.category;
+          let seller = sellers.isVerified;
+          data.isVerified = seller;
 
           const product = {
             ...data,

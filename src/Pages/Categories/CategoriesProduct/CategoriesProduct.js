@@ -1,4 +1,5 @@
-import React from "react";
+import { useQuery } from "@tanstack/react-query";
+import React, { useContext } from "react";
 
 const CategoriesProduct = ({ categoryProduct, setBookingProduct }) => {
   const {
@@ -10,7 +11,9 @@ const CategoriesProduct = ({ categoryProduct, setBookingProduct }) => {
     resalePrice,
     sellerName,
     yearOfUse,
+    isVerified,
   } = categoryProduct;
+  console.log(categoryProduct);
   return (
     <div className="p-5 mx-auto sm:p-10 md:p-16 dark:bg-gray-800 dark:text-gray-100">
       <div className="flex flex-col max-w-3xl mx-auto overflow-hidden rounded">
@@ -45,11 +48,20 @@ const CategoriesProduct = ({ categoryProduct, setBookingProduct }) => {
             </p>
           </div>
           <div className="flex justify-between items-center">
-            <input
-              type="checkbox"
-              className="checkbox checkbox-success "
-              checked
-            />
+            {isVerified ? (
+              <>
+                <input
+                  type="checkbox"
+                  className="checkbox checkbox-success "
+                  checked
+                />
+              </>
+            ) : (
+              <>
+                {" "}
+                <input type="checkbox" className="checkbox  " checked />
+              </>
+            )}
             <label
               onClick={() => setBookingProduct(categoryProduct)}
               htmlFor="categoryProductModal"
