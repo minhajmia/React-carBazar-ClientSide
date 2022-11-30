@@ -28,7 +28,7 @@ const BookingModal = ({ bookingProduct, setBookingProduct, refetch }) => {
     const photo = form.photo.value;
     const booking = { name, email, product, price, phone, location, photo };
 
-    fetch("http://localhost:5000/bookings", {
+    fetch("https://yes-phi-sepia.vercel.app/bookings", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

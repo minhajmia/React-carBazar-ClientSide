@@ -13,16 +13,18 @@ const AddProduct = () => {
   const { data: sellers = [] } = useQuery({
     queryKey: ["/users/sellers"],
     queryFn: () =>
-      fetch(`http://localhost:5000/users/sellers/verify/${user?.email}`).then(
-        (res) => res.json()
-      ),
+      fetch(
+        `https://yes-phi-sepia.vercel.app/users/sellers/verify/${user?.email}`
+      ).then((res) => res.json()),
   });
 
   /* LOAD ALL CATEGORY*/
   const { data: allCategory = [] } = useQuery({
     queryKey: ["categories"],
     queryFn: () =>
-      axios("http://localhost:5000/categories").then((res) => res.json()),
+      axios("https://yes-phi-sepia.vercel.app/categories").then((res) =>
+        res.json()
+      ),
   });
   const navigate = useNavigate();
 
@@ -58,7 +60,7 @@ const AddProduct = () => {
             ...data,
             email: user?.email,
           };
-          fetch("http://localhost:5000/addProduct", {
+          fetch("https://yes-phi-sepia.vercel.app/addProduct", {
             method: "POST",
             headers: {
               authorization: `bearer ${localStorage.getItem("accessToken")}`,

@@ -32,7 +32,7 @@ const CheckOut = ({ booking }) => {
   };
 
   const handleBooking = (id) => {
-    fetch(`http://localhost:5000/booking/payment/${id}`, {
+    fetch(`https://yes-phi-sepia.vercel.app/booking/payment/${id}`, {
       method: "PUT",
     })
       .then((res) => res.json())

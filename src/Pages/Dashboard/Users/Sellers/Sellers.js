@@ -7,7 +7,7 @@ const Sellers = () => {
   const { data: sellers = [], refetch } = useQuery({
     queryKey: ["/users/sellers"],
     queryFn: () =>
-      fetch(`http://localhost:5000/users/sellers`, {
+      fetch(`https://yes-phi-sepia.vercel.app/users/sellers`, {
         headers: {
           authorization: `bearer ${localStorage.getItem("accessToken")}`,
         },
@@ -18,7 +18,7 @@ const Sellers = () => {
   const handleDeleteSeller = (id) => {
     const proceed = window.confirm("Are you sure you want to delete?");
     if (proceed) {
-      fetch(`http://localhost:5000/seller/${id}`, {
+      fetch(`https://yes-phi-sepia.vercel.app/seller/${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())
@@ -33,7 +33,7 @@ const Sellers = () => {
 
   /* HANDLE VERIFY SELLER */
   const handleVerifySeller = (id) => {
-    fetch(`http://localhost:5000/seller/verify/${id}`, {
+    fetch(`https://yes-phi-sepia.vercel.app/seller/verify/${id}`, {
       method: "PUT",
     })
       .then((res) => res.json())

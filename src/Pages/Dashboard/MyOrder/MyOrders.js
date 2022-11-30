@@ -8,7 +8,7 @@ const MyOrders = () => {
   const { data: orders = [] } = useQuery({
     queryKey: [user?.email],
     queryFn: () =>
-      fetch(`http://localhost:5000/bookings?email=${user?.email}`, {
+      fetch(`https://yes-phi-sepia.vercel.app/bookings?email=${user?.email}`, {
         headers: {
           authorization: `bearer ${localStorage.getItem("accessToken")}`,
         },

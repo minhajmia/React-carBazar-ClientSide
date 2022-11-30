@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider";
+import "../Navbar/Navbar.css";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -27,7 +28,10 @@ const Navbar = () => {
             <Link to="dashboard">Dashboard</Link>
           </li>
           <li>
-            <button onClick={handleLogOut} className="btn text-white">
+            <button
+              onClick={handleLogOut}
+              className="btn bg-red-500 text-white  capitalize rounded-sm"
+            >
               LogOut
             </button>
           </li>
@@ -45,7 +49,7 @@ const Navbar = () => {
     </>
   );
   return (
-    <div className="navbar bg-black py-0 my-0 px-10">
+    <div className="navbar bg-black py-5  my-0 px-10">
       <div className="navbar-start p-0 m-0  ">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden bg-white">
@@ -66,7 +70,7 @@ const Navbar = () => {
           </label>
           <ul
             tabIndex={1}
-            className="menu menu-compact dropdown-content mt-3 p-2 shadow  rounded-box w-52 text-white bg-black"
+            className="menu menu-compact dropdown-content mt-3 p-2 shadow  rounded-box w-52 text-white bg-black custom-menu "
           >
             {menu}
           </ul>
@@ -87,7 +91,7 @@ const Navbar = () => {
         </a>
       </div>
       <div className="navbar-center hidden lg:flex p-0 m-0">
-        <ul className="menu menu-horizontal p-0 text-base-100 ">{menu}</ul>
+        <ul className={`menu menu-horizontal p-0 text-base-100  `}>{menu}</ul>
       </div>
       <div className="navbar-end p-0 m-0">
         <img

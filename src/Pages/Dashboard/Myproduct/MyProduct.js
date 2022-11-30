@@ -10,17 +10,20 @@ const MyProduct = () => {
   const { data: sellerProducts = [], refetch } = useQuery({
     queryKey: [user?.email],
     queryFn: () =>
-      fetch(`http://localhost:5000/sellerProducts?email=${user?.email}`, {
-        headers: {
-          authorization: `bearer ${localStorage.getItem("accessToken")}`,
-        },
-      }).then((res) => res.json()),
+      fetch(
+        `https://yes-phi-sepia.vercel.app/sellerProducts?email=${user?.email}`,
+        {
+          headers: {
+            authorization: `bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      ).then((res) => res.json()),
   });
   /*  DELETE SELLER INDIVIDUAL PRODUCT */
   const handleDelete = (id) => {
     const proceed = window.confirm("Are you sure you want to delete?");
     if (proceed) {
-      fetch(`http://localhost:5000/sellerProduct/${id}`, {
+      fetch(`https://yes-phi-sepia.vercel.app/sellerProduct/${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())
@@ -36,7 +39,7 @@ const MyProduct = () => {
   /* ADVERTISE SELLER INDIVIDUAL PRODUCT */
   const handleAdvertise = (id) => {
     console.log(id);
-    fetch(`http://localhost:5000/product/advertise/${id}`, {
+    fetch(`https://yes-phi-sepia.vercel.app/product/advertise/${id}`, {
       method: "PUT",
     })
       .then((res) => res.json())

@@ -6,7 +6,7 @@ const Buyers = () => {
   const { data: buyers = [], refetch } = useQuery({
     queryKey: ["/users/buyers"],
     queryFn: () =>
-      fetch(`http://localhost:5000/users/buyers`, {
+      fetch(`https://yes-phi-sepia.vercel.app/users/buyers`, {
         headers: {
           authorization: `bearer ${localStorage.getItem("accessToken")}`,
         },
@@ -15,7 +15,7 @@ const Buyers = () => {
   const handleDeleteBuyer = (id) => {
     const proceed = window.confirm("Are you sure you want to delete?");
     if (proceed) {
-      fetch(`http://localhost:5000/buyer/${id}`, {
+      fetch(`https://yes-phi-sepia.vercel.app/buyer/${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())

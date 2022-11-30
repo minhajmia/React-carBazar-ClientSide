@@ -10,8 +10,8 @@ const Categories = () => {
   const { data: categoryProducts = [], refetch } = useQuery({
     queryKey: ["id"],
     queryFn: () =>
-      fetch(`http://localhost:5000/products/${params.id}`).then((res) =>
-        res.json()
+      fetch(`https://yes-phi-sepia.vercel.app/products/${params.id}`).then(
+        (res) => res.json()
       ),
   });
 

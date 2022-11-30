@@ -72,7 +72,7 @@ const Register = () => {
   // Save user to Database
   const saveUserToDb = (name, email, role) => {
     const user = { name, email, role };
-    fetch("http://localhost:5000/users", {
+    fetch("https://yes-phi-sepia.vercel.app/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -95,7 +95,7 @@ const Register = () => {
         const name = user.displayName;
 
         fetch(
-          `http://localhost:5000/users/googleLogin?email=${email}&name=${name}`,
+          `https://yes-phi-sepia.vercel.app/users/googleLogin?email=${email}&name=${name}`,
           {
             method: "PUT",
           }

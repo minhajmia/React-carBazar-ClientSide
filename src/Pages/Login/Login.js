@@ -48,7 +48,7 @@ const Login = () => {
         const name = user.displayName;
 
         fetch(
-          `http://localhost:5000/users/googleLogin?email=${email}&name=${name}`,
+          `https://yes-phi-sepia.vercel.app/users/googleLogin?email=${email}&name=${name}`,
           {
             method: "PUT",
           }

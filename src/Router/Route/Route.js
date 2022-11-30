@@ -84,7 +84,7 @@ const router = createBrowserRouter([
           </BuyerRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/bookings/${params.id}`),
+          fetch(`https://yes-phi-sepia.vercel.app/bookings/${params.id}`),
       },
 
       {
