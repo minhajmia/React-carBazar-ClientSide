@@ -1,12 +1,13 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const CheckOut = ({ booking }) => {
   const [cardError, setCardError] = useState("");
   const stripe = useStripe();
   const elements = useElements();
-
-  const { price } = booking;
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -30,17 +31,25 @@ const CheckOut = ({ booking }) => {
     }
   };
 
+  const handleBooking = (id) => {
+    fetch(`http://localhost:5000/booking/payment/${id}`, {
+      method: "PUT",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.acknowledged) {
+          toast.success("Payment Successful");
+          navigate("/dashboard/dashboard/myOrders");
+        }
+      });
+  };
   return (
     <div>
-      <form
-        onSubmit={handleSubmit}
-        className="w-[500px] border-1 bg-slate-200 rounded-md py-5 px-3 text-white"
-      >
+      <div>
         <CardElement />
         <button
-          type="submit"
+          onClick={() => handleBooking(booking._id)}
           className="btn bg-red-500 text-white btn-sm mt-2"
-          disabled={!useStripe}
         >
           Pay
         </button>
@@ -49,7 +58,7 @@ const CheckOut = ({ booking }) => {
             <p className="text-1xl text-white">{cardError}</p>
           </>
         )}
-      </form>
+      </div>
     </div>
   );
 };

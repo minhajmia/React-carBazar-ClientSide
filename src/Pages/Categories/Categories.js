@@ -37,7 +37,9 @@ const Categories = () => {
       </div>
       <div className="flex justify-center my-5">
         <Link to="/">
-          <button className="btn ">Go Back to Home</button>
+          <button className="btn rounded-sm bg-red-500 border-0 mb-5">
+            Go Back to Home
+          </button>
         </Link>
       </div>
     </>

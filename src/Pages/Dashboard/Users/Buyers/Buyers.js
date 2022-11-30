@@ -28,8 +28,10 @@ const Buyers = () => {
     }
   };
   return (
-    <div>
-      <h3 className="text-2xl font-bold">Total Buyers {buyers.length}</h3>
+    <div className="mt-10">
+      <h3 className="text-2xl font-bold mb-5">
+        Total Buyers ( {buyers.length} )
+      </h3>
       <div>
         <div className="overflow-x-auto">
           <table className="table w-full">
@@ -53,7 +55,7 @@ const Buyers = () => {
                     <td>
                       <button
                         onClick={() => handleDeleteBuyer(buyer._id)}
-                        className="btn btn-error"
+                        className=" btn btn-sm text-white bg-red-500  rounded-sm border-0"
                       >
                         Delete
                       </button>

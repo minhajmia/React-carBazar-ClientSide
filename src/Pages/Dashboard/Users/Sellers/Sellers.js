@@ -45,8 +45,10 @@ const Sellers = () => {
       });
   };
   return (
-    <div>
-      <h3 className="text-2xl font-bold">Total Sellers {sellers.length}</h3>
+    <div className="mt-10">
+      <h3 className="text-2xl font-bold mb-5">
+        Total Sellers: ( {sellers.length} )
+      </h3>
       <div>
         <div className="overflow-x-auto">
           <table className="table w-full">
@@ -73,7 +75,7 @@ const Sellers = () => {
                         <>
                           {" "}
                           <>
-                            <button className="btn btn-success">
+                            <button className="btn btn-success rounded-sm border-0 btn-sm text-white">
                               Verified
                             </button>
                           </>
@@ -82,7 +84,7 @@ const Sellers = () => {
                         <>
                           <button
                             onClick={() => handleVerifySeller(seller._id)}
-                            className="btn btn-warning capitalize"
+                            className=" btn btn-sm text-white btn-warning  rounded-sm border-0"
                           >
                             Unverified
                           </button>
@@ -92,7 +94,7 @@ const Sellers = () => {
                     <td>
                       <button
                         onClick={() => handleDeleteSeller(seller._id)}
-                        className="btn btn-error"
+                        className="btn bg-red-500 rounded-sm border-0 btn-sm"
                       >
                         Delete
                       </button>

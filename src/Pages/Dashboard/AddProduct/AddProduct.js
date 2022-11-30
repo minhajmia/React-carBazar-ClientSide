@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "./../../../Context/AuthProvider";
+const axios = require("axios");
 
 const AddProduct = () => {
   const { user } = useContext(AuthContext);
@@ -21,7 +22,7 @@ const AddProduct = () => {
   const { data: allCategory = [] } = useQuery({
     queryKey: ["categories"],
     queryFn: () =>
-      fetch("http://localhost:5000/categories").then((res) => res.json()),
+      axios("http://localhost:5000/categories").then((res) => res.json()),
   });
   const navigate = useNavigate();
 
@@ -46,8 +47,12 @@ const AddProduct = () => {
           data.picture = photo;
           let category_id;
           category_id = data.category;
-          let seller = sellers.isVerified;
-          data.isVerified = seller;
+
+          if (sellers.isVerified) {
+            data.seller = true;
+          } else {
+            data.seller = false;
+          }
 
           const product = {
             ...data,
@@ -78,12 +83,12 @@ const AddProduct = () => {
         onSubmit={handleSubmit(handleAddProduct)}
         novalidate=""
         action=""
-        className="container flex flex-col mx-auto space-y-12 ng-untouched ng-pristine ng-valid"
+        className="container flex flex-col mx-auto space-y-12 ng-untouched ng-pristine ng-valid "
       >
         <fieldset className="grid grid-cols-4 gap-6 p-6 rounded-md ">
           <div className="grid grid-cols-6 gap-4 col-span-full lg:col-span-3">
             <div className="col-span-full sm:col-span-3">
-              <label for="firstname" className="text-sm">
+              <label for="firstname" className="font-semibold">
                 Product Name
               </label>
               <input
@@ -94,7 +99,7 @@ const AddProduct = () => {
               />
             </div>
             <div className="col-span-full sm:col-span-3">
-              <label for="" className="text-sm">
+              <label for="" className="text-sm font-semibold">
                 Original Price
               </label>
               <input
@@ -105,7 +110,7 @@ const AddProduct = () => {
               />
             </div>
             <div className="col-span-full sm:col-span-3">
-              <label for="" className="text-sm">
+              <label for="" className="text-sm font-semibold">
                 Sale Price
               </label>
               <input
@@ -116,7 +121,7 @@ const AddProduct = () => {
               />
             </div>
             <div className="col-span-full sm:col-span-3">
-              <label for="" className="text-sm">
+              <label for="" className="text-sm font-semibold">
                 Year of Use
               </label>
               <input
@@ -127,7 +132,7 @@ const AddProduct = () => {
               />
             </div>
             <div className="col-span-full sm:col-span-3">
-              <label for="" className="text-sm">
+              <label for="" className="text-sm font-semibold">
                 Date
               </label>
               <input
@@ -138,7 +143,7 @@ const AddProduct = () => {
               />
             </div>
             <div className="col-span-full sm:col-span-3">
-              <label for="" className="text-sm">
+              <label for="" className="text-sm font-semibold">
                 Seller Name
               </label>
               <input
@@ -149,7 +154,7 @@ const AddProduct = () => {
               />
             </div>
             <div className="col-span-full sm:col-span-3">
-              <label for="" className="text-sm">
+              <label for="" className="text-sm font-semibold">
                 Product Status
               </label>
               <select
@@ -162,7 +167,7 @@ const AddProduct = () => {
               </select>
             </div>
             <div className="col-span-full sm:col-span-3">
-              <label for="" className="text-sm">
+              <label for="" className="text-sm font-semibold">
                 Phone Number
               </label>
               <input
@@ -173,7 +178,7 @@ const AddProduct = () => {
               />
             </div>
             <div className="col-span-full sm:col-span-3">
-              <label for="" className="text-sm">
+              <label for="" className="text-sm font-semibold">
                 Location
               </label>
               <select
@@ -191,7 +196,7 @@ const AddProduct = () => {
               </select>
             </div>
             <div className="col-span-full sm:col-span-3">
-              <label for="" className="text-sm">
+              <label for="" className="text-sm font-semibold">
                 Category
               </label>
               <select
@@ -207,7 +212,7 @@ const AddProduct = () => {
               </select>
             </div>
             <div className="col-span-full sm:col-span-3">
-              <label for="" className="text-sm">
+              <label for="" className="text-sm font-semibold">
                 Description
               </label>
               <textarea
@@ -217,7 +222,7 @@ const AddProduct = () => {
               ></textarea>
             </div>
             <div className="col-span-full sm:col-span-3">
-              <label for="" className="text-sm">
+              <label for="" className="text-sm font-semibold">
                 Product Photo
               </label>
               <input
@@ -227,7 +232,11 @@ const AddProduct = () => {
                 {...register("photo", { required: true })}
               />
             </div>
-            <input type="submit" className="btn w-full" value="Submit" />
+            <input
+              type="submit"
+              className="bg-red-500 py-3 rounded-sm font-semibold text-white "
+              value="Add Now"
+            />
           </div>
         </fieldset>
       </form>

@@ -14,9 +14,12 @@ const MyOrders = () => {
         },
       }).then((res) => res.json()),
   });
+
   return (
-    <div>
-      <h2 className="text-2xl  font-bold">My Orders {orders.length}</h2>
+    <div className=" mt-10">
+      <h2 className="text-2xl  font-bold mb-5">
+        My Orders ( {orders.length} ){" "}
+      </h2>
       <div>
         <div className="overflow-x-auto w-full">
           <table className="table w-full">
@@ -54,21 +57,24 @@ const MyOrders = () => {
                       <p>{order.product}</p>
                     </td>
                     <td>{order.price}</td>
-                    {order.price && !order.paid ? (
+                    {order.isPaid ? (
                       <>
                         <th>
                           <Link
                             to={`/dashboard/dashboard/myOrders/${order._id}`}
                           >
-                            <button className="btn btn-accent btn-sm">
-                              Pay
+                            <button className="btn btn-success btn-sm">
+                              paid
                             </button>
                           </Link>
                         </th>
                       </>
                     ) : (
                       <>
-                        <span className="btn">paid</span>
+                        <Link to={`/dashboard/dashboard/myOrders/${order._id}`}>
+                          {" "}
+                          <span className="btn btn-warning">pay</span>
+                        </Link>
                       </>
                     )}
                   </tr>

@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
+import { AuthContext } from "../../../Context/AuthProvider";
 
 const CategoriesProduct = ({ categoryProduct, setBookingProduct }) => {
   const {
@@ -11,9 +12,8 @@ const CategoriesProduct = ({ categoryProduct, setBookingProduct }) => {
     resalePrice,
     sellerName,
     yearOfUse,
-    isVerified,
+    seller,
   } = categoryProduct;
-  console.log(categoryProduct);
   return (
     <div className="p-5 mx-auto sm:p-10 md:p-16 dark:bg-gray-800 dark:text-gray-100">
       <div className="flex flex-col max-w-3xl mx-auto overflow-hidden rounded">
@@ -22,18 +22,18 @@ const CategoriesProduct = ({ categoryProduct, setBookingProduct }) => {
           alt=""
           className="w-full h-60 sm:h-96 dark:bg-gray-500"
         />
-        <div className="p-6 pb-12 m-4 mx-auto -mt-16 space-y-6 lg:max-w-2xl sm:px-10 sm:mx-12 lg:rounded-md bg-gray-300">
+        <div className="p-6 pb-12 m-4 mx-auto -mt-16 space-y-6 lg:max-w-2xl sm:px-10 sm:mx-12 lg:rounded-md bg-black text-white">
           <div className="space-y-2">
-            <h3 className="text-3xl font-semibold"> {name}</h3>
-            <p className="text-xs dark:text-gray-400 font-bold">
-              Price: $ {resalePrice}
+            <h3 className="text-3xl font-semibold text-red-500"> {name}</h3>
+            <p className="text-1xl ">
+              <span className=" font-bold"> Price :</span> $ {resalePrice}
             </p>
             <p className="text-xs dark:text-gray-400 font-bold ">
               Original Price: $
-              <span className="line-through"> {orginalPrice}</span>
+              <span className="line-through text-red-500"> {orginalPrice}</span>
             </p>
             <p className="text-xs dark:text-gray-400 font-bold ">
-              Year of use: $<span> {yearOfUse}</span>
+              Year of use: <span> {yearOfUse}</span>
             </p>
           </div>
           <div className="dark:text-gray-100">
@@ -48,7 +48,7 @@ const CategoriesProduct = ({ categoryProduct, setBookingProduct }) => {
             </p>
           </div>
           <div className="flex justify-between items-center">
-            {isVerified ? (
+            {!seller === false ? (
               <>
                 <input
                   type="checkbox"
@@ -59,13 +59,13 @@ const CategoriesProduct = ({ categoryProduct, setBookingProduct }) => {
             ) : (
               <>
                 {" "}
-                <input type="checkbox" className="checkbox  " checked />
+                <h1>Unverified</h1>
               </>
             )}
             <label
               onClick={() => setBookingProduct(categoryProduct)}
               htmlFor="categoryProductModal"
-              className="btn"
+              className="btn bg-red-500 rounded-sm"
             >
               Book Now
             </label>

@@ -5,6 +5,8 @@ import useAdmin from "../../Hooks/useAdmin";
 import useBuyer from "../../Hooks/useBuyer";
 import useSeller from "../../Hooks/useSeller";
 import Navbar from "../../Parts/Navbar/Navbar";
+import { PlusIcon, ArrowUturnRightIcon } from "@heroicons/react/24/solid";
+import { FaUserNurse } from "react-icons/fa";
 
 const DashboardLayout = () => {
   const { user } = useContext(AuthContext);
@@ -15,40 +17,61 @@ const DashboardLayout = () => {
   return (
     <div>
       <Navbar />
-      <div className="drawer drawer-mobile">
+      <div className="drawer drawer-mobile ">
         <input id="dashboardDrawer" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content flex">
+        <div className="drawer-content ml-10">
           <Outlet />
         </div>
-        <div className="drawer-side">
+        <div className="drawer-side bg-black pt-10 text-white">
           <label htmlFor="dashboardDrawer" className="drawer-overlay"></label>
-          <ul className="menu p-4 w-80 text-base-content">
+          <ul className="menu p-4 w-80 ">
             {isBuyer && (
               <>
-                <li>
-                  <Link to="/dashboard/dashboard/myOrders">My Orders</Link>
+                <li className=" bg-red-500 rounded-sm text-white mb-3">
+                  <Link to="/dashboard/dashboard/myOrders">
+                    {" "}
+                    <ArrowUturnRightIcon className="h-6 w-6 text-white opacity-100" />{" "}
+                    My Orders
+                  </Link>
                 </li>
               </>
             )}
 
             {isAdmin && (
               <>
-                <li>
-                  <Link to="/dashboard/dashboard/sellers">All Sellers</Link>
+                <li className=" bg-red-500 rounded-sm text-white mb-3">
+                  <Link to="/dashboard/dashboard/sellers">
+                    {" "}
+                    <FaUserNurse className="h-6 w-6 text-white opacity-100" />
+                    All Sellers
+                  </Link>
                 </li>
-                <li>
-                  <Link to="/dashboard/dashboard/buyers">All Buyers</Link>
+                <li className=" bg-red-500 rounded-sm text-white mb-3">
+                  <Link to="/dashboard/dashboard/buyers">
+                    {" "}
+                    <FaUserNurse className="h-6 w-6 text-white opacity-100" />
+                    All Buyers
+                  </Link>
                 </li>
               </>
             )}
 
             {isSeller && (
               <>
-                <li>
-                  <Link to="/dashboard/dashboard/addProduct">Add Product</Link>
+                <li className=" bg-red-500 rounded-sm text-white mb-3">
+                  <Link to="/dashboard/dashboard/addProduct">
+                    {" "}
+                    <PlusIcon className="h-6 w-6 text-white opacity-100" />
+                    Add Product
+                  </Link>
                 </li>
-                <li>
-                  <Link to="/dashboard/dashboard/myProducts">My Products</Link>
+
+                <li className=" bg-red-500 rounded-sm text-white">
+                  <Link to="/dashboard/dashboard/myProducts">
+                    {" "}
+                    <ArrowUturnRightIcon className="h-6 w-6 text-white opacity-100" />
+                    My Products
+                  </Link>
                 </li>
               </>
             )}

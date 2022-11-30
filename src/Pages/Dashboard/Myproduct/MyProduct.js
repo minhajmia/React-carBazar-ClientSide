@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../../Context/AuthProvider";
+import { TrashIcon } from "@heroicons/react/24/solid";
 
 const MyProduct = () => {
   const { user } = useContext(AuthContext);
@@ -35,30 +36,29 @@ const MyProduct = () => {
   /* ADVERTISE SELLER INDIVIDUAL PRODUCT */
   const handleAdvertise = (id) => {
     console.log(id);
-    fetch(`http://localhost:5000/product/advertise/${id}`, { method: "PUT" })
+    fetch(`http://localhost:5000/product/advertise/${id}`, {
+      method: "PUT",
+    })
       .then((res) => res.json())
       .then((data) => {
-        if (data.modifiedCount > 0) {
-          toast.success("Advertise successful");
-        }
+        console.log(data);
       });
   };
   return (
-    <div>
-      <h2 className="text-2xl  font-bold">
-        My Added Product {sellerProducts.length}
+    <div className="mt-10">
+      <h2 className="text-2xl  font-bold mb-3">
+        My Total Product : ( {sellerProducts.length} )
       </h2>
       <div>
-        <div className="overflow-x-auto w-full">
-          <table className="table w-full">
-            <thead>
+        <div className="overflow-x-auto w-full ">
+          <table className="table w-full ">
+            <thead className="bg-red-500">
               <tr>
                 <th>Product Image</th>
                 <th>Price</th>
                 <th>Product Status</th>
-                <th>Product Status</th>
                 <th>Advertise </th>
-                <th>Delete Action</th>
+                <th> Action</th>
               </tr>
             </thead>
             <tbody>
@@ -76,15 +76,14 @@ const MyProduct = () => {
                     </td>
                     <td>$ {product.resalePrice}</td>
                     <th>
-                      <button className="btn btn-accent">Available</button>
-                    </th>
-                    <th>
-                      <button className="btn btn-accent">Sold</button>
+                      <button className="btn btn-accent rounded-sm text-white">
+                        Available
+                      </button>
                     </th>
                     <th>
                       <button
                         onClick={() => handleAdvertise(product._id)}
-                        className="btn btn-success"
+                        className="btn btn-success rounded-sm text-white"
                       >
                         Advertise
                       </button>
@@ -92,7 +91,7 @@ const MyProduct = () => {
                     <th>
                       <button
                         onClick={() => handleDelete(product._id)}
-                        className="btn btn-error"
+                        className="btn bg-red-500 border-0 rounded-sm"
                       >
                         Delete
                       </button>

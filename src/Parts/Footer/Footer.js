@@ -96,12 +96,12 @@ const Footer = () => {
               <div className="flex justify-start space-x-3">
                 <a
                   rel="noopener noreferrer"
-                  href="#"
+                  href="https://www.facebook.com/minhaj41803095"
                   title="Facebook"
                   className="flex items-center p-1"
                 >
                   <svg
-                    xmlns="http://www.w3.org/2000/svg"
+                    xmlns="https://www.facebook.com/minhaj41803095"
                     fill="currentColor"
                     viewBox="0 0 32 32"
                     className="w-5 h-5 fill-current"
@@ -111,7 +111,7 @@ const Footer = () => {
                 </a>
                 <a
                   rel="noopener noreferrer"
-                  href="#"
+                  href="https://twitter.com/Minhajmia5"
                   title="Twitter"
                   className="flex items-center p-1"
                 >

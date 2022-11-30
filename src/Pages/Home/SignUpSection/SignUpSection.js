@@ -16,14 +16,14 @@ const SignUpSection = () => {
           </p>
           <div className="flex flex-col space-y-4 sm:space-y-0 sm:flex-row sm:space-x-8">
             <Link to="/about">
-              <button className="px-8 py-3 text-lg font-semibold rounded  btn btn-outline ">
+              <button className="px-8 py-3 text-lg font-semibold rounded-sm  btn btn-outline hover:bg-red-500 hover:border-0">
                 {" "}
                 Learn more{" "}
               </button>
             </Link>
             <Link to="/register">
               {" "}
-              <button className="px-8 py-3 text-lg font-normal border-0 rounded btn-active bg-red-500 btn">
+              <button className="px-8 py-3 text-lg font-normal border-0 rounded-sm btn-active bg-red-500 btn">
                 Get started
               </button>
             </Link>

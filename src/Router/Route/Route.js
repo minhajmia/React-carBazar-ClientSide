@@ -11,7 +11,6 @@ import MyProduct from "../../Pages/Dashboard/Myproduct/MyProduct";
 import Payment from "../../Pages/Dashboard/Payment/Payment";
 import Buyers from "../../Pages/Dashboard/Users/Buyers/Buyers";
 import Sellers from "../../Pages/Dashboard/Users/Sellers/Sellers";
-import Users from "../../Pages/Dashboard/Users/Users";
 import Login from "../../Pages/Login/Login";
 import NotFound from "../../Pages/NotFound/NotFound";
 import Register from "../../Pages/Register/Register";
@@ -52,7 +51,6 @@ const router = createBrowserRouter([
     children: [
       { path: "/dashboard", element: <Dashboard /> },
       { path: "/dashboard/dashboard", element: <Dashboard /> },
-      { path: "/dashboard/dashboard/users", element: <Users /> },
       { path: "/dashboard/dashboard/myOrders", element: <MyOrders /> },
       {
         path: "/dashboard/dashboard/sellers",
