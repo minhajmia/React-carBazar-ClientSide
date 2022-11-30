@@ -45,7 +45,7 @@ const CheckOut = ({ booking }) => {
   };
   return (
     <div>
-      <div>
+      <div className="border p-5 bg-black text-white rounded-sm">
         <CardElement />
         <button
           onClick={() => handleBooking(booking._id)}

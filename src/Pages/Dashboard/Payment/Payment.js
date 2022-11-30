@@ -13,16 +13,20 @@ const Payment = () => {
   console.log(stripePromise);
   return (
     <div
-      className="grid sm:grid-cols-1 md:grid-cols-2 gap-10 my-10
+      className="grid sm:grid-cols-1 md:grid-cols-2 gap-10 my-10 md:text-black sm:text-white
     "
     >
-      <div className="w-1/2">
+      <div className="mt-5">
         <Elements stripe={stripePromise}>
           <CheckOut booking={booking} />
         </Elements>
       </div>
       <div>
-        <h2 className="font-bold text-2xl">Product && Personal Info</h2>
+        <h3 className="font-semibold">Product Info And Buyer Info</h3>
+        <p>Buyer name: {name}</p>
+        <p>Buyer email: {email}</p>
+        <p>Car name: {product}</p>
+        <p>Car price: {price}</p>
       </div>
     </div>
   );

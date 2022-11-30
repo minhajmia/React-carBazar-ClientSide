@@ -22,7 +22,7 @@ const DashboardLayout = () => {
         <div className="drawer-content ml-10">
           <Outlet />
         </div>
-        <div className="drawer-side bg-black pt-10 text-white">
+        <div className="drawer-side md:bg-black pt-10 text-white">
           <label htmlFor="dashboardDrawer" className="drawer-overlay"></label>
           <ul className="menu p-4 w-80 ">
             {isBuyer && (
